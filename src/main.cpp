@@ -37,14 +37,13 @@ void checkControlData()
       if (panIndex != -1)
       {
         // Extract PAN value
-        String panVal = msg.substring(panIndex + 4);
+        String panVal = msg.substring(panIndex + 4); // Extract everything after "PAN:"
         int pan = panVal.toInt();
 
         Serial.printf("Parsed ➜ PAN: %d\n", pan);
 
-        int panMapped = map(pan, 0, 180, 40, 160);
-
-        panServo.write(panMapped);
+        // Move the pan servo
+        panServo.write(pan); // Write the value directly to the servo
       }
     }
   }

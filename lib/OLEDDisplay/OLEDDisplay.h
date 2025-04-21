@@ -18,7 +18,7 @@ public:
 
 private:
     int _width, _height, _sda, _scl;
-    Adafruit_SSD1306 display; // This is declared after the variables
+    Adafruit_SSD1306 display;
     unsigned long lastUpdate = 0;
     int dotCount = 0;
 };

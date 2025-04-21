@@ -1,7 +1,7 @@
 #include "OLEDDisplay.h"
 
 OLEDDisplay::OLEDDisplay(int width, int height, int sda, int scl)
-    : _width(width), _height(height), _sda(sda), _scl(scl), display(width, height, &Wire, 0x3C) {} // Initialize in order
+    : _width(width), _height(height), _sda(sda), _scl(scl), display(width, height, &Wire, 0x3C) {}
 
 void OLEDDisplay::begin()
 {
@@ -37,7 +37,7 @@ void OLEDDisplay::clear()
 void OLEDDisplay::animateConnecting()
 {
     unsigned long currentMillis = millis();
-    if (currentMillis - lastUpdate >= 300) // Faster animation speed
+    if (currentMillis - lastUpdate >= 300)
     {
         lastUpdate = currentMillis;
         dotCount = (dotCount + 1) % 4;
@@ -56,7 +56,6 @@ void OLEDDisplay::showConnected()
 {
     display.clearDisplay();
 
-    // Line 1: center "Connected"
     int16_t x1, y1;
     uint16_t w, h;
     display.setTextSize(2);
@@ -64,12 +63,10 @@ void OLEDDisplay::showConnected()
     display.setCursor((display.width() - w) / 2, 0);
     display.println("Connected");
 
-    // Line 2: center "to"
     display.getTextBounds("to", 0, 0, &x1, &y1, &w, &h);
     display.setCursor((display.width() - w) / 2, 24);
     display.println("to");
 
-    // Line 3: center "robot"
     display.getTextBounds("robot", 0, 0, &x1, &y1, &w, &h);
     display.setCursor((display.width() - w) / 2, 48);
     display.println("robot");
