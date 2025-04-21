@@ -1,6 +1,4 @@
 #include <Arduino.h>
-#include <Arduino.h>
-#include <WiFiUdp.h>
 #include <ESPConnection.h>
 
 ESPConnection connection("ESP8266_Robot", "robot123");
@@ -12,5 +10,5 @@ void setup()
 
 void loop()
 {
-  connection.listenForServer();
+  connection.listenAndHandle(); // New unified function to manage server + notification
 }
