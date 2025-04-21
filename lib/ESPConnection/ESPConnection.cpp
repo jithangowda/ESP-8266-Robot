@@ -104,7 +104,8 @@ void ESPConnection::checkAllConnectedNotification()
             {
                 allConnected = true;
                 oled.showConnected();
-                blinkLED(5);
+                blinkLED(3);
+
                 Serial.println("[ESP8266] ✅ All connected!");
             }
         }
@@ -116,7 +117,7 @@ void ESPConnection::listenAndHandle()
     if (!serverFound)
     {
         checkForServerBroadcast();
-        oled.animateConnecting(); // ✅ show animated dots
+        oled.animateConnecting();
     }
     else
     {

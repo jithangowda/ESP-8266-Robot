@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <WiFiManager.h>
 #include <WiFiUdp.h>
-#include "OLEDDisplay.h"
+#include <OLEDDisplay.h>
 
 #define UDP_PORT 4210
 #define NOTIFY_PORT 4213
