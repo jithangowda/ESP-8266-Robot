@@ -1,7 +1,14 @@
 #include "ESPConnection.h"
 
 ESPConnection::ESPConnection(const char *apName, const char *apPassword)
-    : _apName(apName), _apPassword(apPassword), display(128, 64, &Wire, -1) {}
+    : _apName(apName),
+      _apPassword(apPassword),
+      udp(),
+      notifyUdp(),
+      serverIP(),
+      serverFound(false),
+      allConnected(false),
+      oled(128, 64, 5, 4) {}
 
 void ESPConnection::begin()
 {
@@ -9,18 +16,8 @@ void ESPConnection::begin()
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.println("Booting...");
 
-    Wire.begin(5, 4); // SDA=D1(GPIO5), SCL=D2(GPIO4)
-    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
-    {
-        Serial.println("OLED init failed");
-    }
-    else
-    {
-        display.clearDisplay();
-        display.setTextSize(2);
-        display.setTextColor(SSD1306_WHITE);
-        showOLEDMessage("Connecting...");
-    }
+    oled.begin();
+    oled.showMessage("Connecting");
 
     WiFiManager wm;
     if (!wm.autoConnect(_apName, _apPassword))
@@ -38,14 +35,6 @@ void ESPConnection::begin()
     notifyUdp.begin(NOTIFY_PORT);
 
     Serial.println("Listening for server and notifications...");
-}
-
-void ESPConnection::showOLEDMessage(const String &msg)
-{
-    display.clearDisplay();
-    display.setCursor(0, 0);
-    display.println(msg);
-    display.display();
 }
 
 void ESPConnection::blinkLED(int times)
@@ -114,7 +103,7 @@ void ESPConnection::checkAllConnectedNotification()
             if (msg == "ALL_CONNECTED" && !allConnected)
             {
                 allConnected = true;
-                showOLEDMessage("Connected\nto robot");
+                oled.showConnected();
                 blinkLED(5);
                 Serial.println("[ESP8266] ✅ All connected!");
             }
@@ -127,6 +116,7 @@ void ESPConnection::listenAndHandle()
     if (!serverFound)
     {
         checkForServerBroadcast();
+        oled.animateConnecting(); // ✅ show animated dots
     }
     else
     {
