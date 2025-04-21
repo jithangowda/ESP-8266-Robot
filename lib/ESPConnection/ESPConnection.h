@@ -29,8 +29,6 @@ private:
 
     OLEDDisplay oled;
 
-   
-
     void blinkLED(int times);
     void sendESPConnectedMessage();
     void checkForServerBroadcast();

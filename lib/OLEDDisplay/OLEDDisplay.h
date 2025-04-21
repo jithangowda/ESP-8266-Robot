@@ -17,8 +17,8 @@ public:
     void showConnected();
 
 private:
-    Adafruit_SSD1306 display;
     int _width, _height, _sda, _scl;
+    Adafruit_SSD1306 display; // This is declared after the variables
     unsigned long lastUpdate = 0;
     int dotCount = 0;
 };

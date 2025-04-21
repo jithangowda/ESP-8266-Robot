@@ -1,7 +1,7 @@
 #include "OLEDDisplay.h"
 
 OLEDDisplay::OLEDDisplay(int width, int height, int sda, int scl)
-    : _width(width), _height(height), _sda(sda), _scl(scl), display(width, height, &Wire, -1) {}
+    : _width(width), _height(height), _sda(sda), _scl(scl), display(width, height, &Wire, 0x3C) {} // Initialize in order
 
 void OLEDDisplay::begin()
 {
