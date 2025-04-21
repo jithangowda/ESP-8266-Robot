@@ -105,7 +105,6 @@ void ESPConnection::checkAllConnectedNotification()
                 allConnected = true;
                 oled.showConnected();
                 blinkLED(3);
-
                 Serial.println("[ESP8266] ✅ All connected!");
             }
         }
