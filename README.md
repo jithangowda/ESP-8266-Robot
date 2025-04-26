@@ -1,6 +1,6 @@
 # ESP-8266-Robot
 
-This repository contains the PlatformIO project for the ESP8266-based robot.
+This repository contains the PlatformIO project for the **ESP8266 Development Board** (e.g., NodeMCU) used in the **Hazard Detection Robot** project.
 
 ## How to Use
 
