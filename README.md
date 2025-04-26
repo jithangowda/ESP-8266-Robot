@@ -24,10 +24,14 @@ This repository contains the PlatformIO project for the **ESP8266 Development Bo
     - In the PlatformIO toolbar (at the bottom), click **Build** to compile the code.
     - Once the build is successful, click **Upload** to flash the code to your ESP8266.
 
+6. **Connect to Wi-Fi**:
+    - After uploading, the ESP8266 will start a temporary Wi-Fi network named **ESP8266_Robot**.
+    - Connect to this network using the password: `robot123`.
+    - A configuration page will appear where you can set your home Wi-Fi credentials.
+    - After configuration, the ESP8266 will automatically reconnect to your Wi-Fi in future boots.
+
 ## Requirements
 
 - ESP8266 Development Board (e.g., NodeMCU)
 - Visual Studio Code
 - PlatformIO Extension
-
----
