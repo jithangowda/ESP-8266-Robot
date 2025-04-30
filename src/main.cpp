@@ -7,14 +7,14 @@
 ESPConnection connection("ESP8266_Robot", "robot123");
 WiFiUDP controlUdp;
 
-Servo panServo;
+Servo tiltServo;
 
 void setup()
 {
   connection.begin();
   controlUdp.begin(CONTROL_PORT);
 
-  panServo.attach(13);
+  tiltServo.attach(2);
   Serial.println("Setup complete");
 }
 
@@ -32,18 +32,16 @@ void checkControlData()
       Serial.print("[ESP8266] Control data: ");
       Serial.println(msg);
 
-      int panIndex = msg.indexOf("PAN:");
+      int tiltIndex = msg.indexOf("TILT:");
 
-      if (panIndex != -1)
+      if (tiltIndex != -1)
       {
-        // Extract PAN value
-        String panVal = msg.substring(panIndex + 4); // Extract everything after "PAN:"
-        int pan = panVal.toInt();
+        String tiltVal = msg.substring(tiltIndex + 5);
+        int tilt = tiltVal.toInt();
 
-        Serial.printf("Parsed ➜ PAN: %d\n", pan);
+        Serial.printf("Parsed ➜ TILT: %d\n", tilt);
 
-        // Move the pan servo
-        panServo.write(pan); // Write the value directly to the servo
+        tiltServo.write(tilt);
       }
     }
   }
